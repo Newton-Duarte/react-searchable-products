@@ -23,13 +23,13 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-30">
-      <div className="bg-white rounded-lg shadow-lg max-w-lg w-full bg-opacity-90">
+      <div className="bg-white rounded-lg shadow-lg max-w-lg w-full bg-opacity-90 mx-4 sm:mx-0">
         <button
           onClick={onClose}
           type="button"
           className="cursor-pointer absolute top-2 right-2 text-gray-500 hover:text-gray-700"
         >
-          <X className="size-12" />
+          <X className="size-8 sm:size-12" />
         </button>
         {children}
       </div>
