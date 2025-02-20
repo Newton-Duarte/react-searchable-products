@@ -101,6 +101,7 @@ export function App() {
           <Search className="size-4 absolute top-1/2 left-4 transform -translate-x-1/2 -translate-y-1/2 text-gray-800" />
           <input
             id="search-product"
+            type="search"
             className="border bg-gray-50 rounded outline-0 pl-8 py-2 pr-2 w-full text-gray-800"
             placeholder="Search products..."
             value={search}
