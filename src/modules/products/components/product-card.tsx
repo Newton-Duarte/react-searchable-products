@@ -2,9 +2,9 @@ import { ProductDescription } from './product-description';
 import { ProductImage } from './product-image';
 import { ProductPrice } from './product-price';
 import { ProductTitle } from './product-title';
-import { formatCurrency } from '../../utils/format-currency';
 import { ProductRating } from './product-rating';
-import { Badge } from '../badge';
+import { Badge } from '../../../components/badge';
+import { formatCurrency } from '../../../utils/format-currency';
 
 type ProductCardProps = {
   product: Product;
