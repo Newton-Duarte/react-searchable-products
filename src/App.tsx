@@ -9,42 +9,26 @@ import { Badge } from './components/badge';
 import { ProductPrice } from './components/product/product-price';
 import { formatCurrency } from './utils/format-currency';
 import { ProductRating } from './components/product/product-rating';
-import { FolderSearch, Search } from 'lucide-react';
-import { normalizeStringForComparison } from './utils/compare-string';
+import { FolderSearch, Search, ArrowUp } from 'lucide-react';
 import { Loading } from './components/loading';
 import { Error } from './components/error';
+import { useSearchParams } from 'react-router';
 
 export function App() {
   const [search, setSearch] = useState('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentSearch = searchParams.get('q');
+
   const timeoutRef = useRef<number | null>(null);
 
-  const { data, isLoading, isError } = useGetProducts();
+  const { data, isLoading, isError } = useGetProducts({
+    search: currentSearch,
+  });
 
-  const computedProducts = useMemo(() => {
-    if (!search) return data || [];
-
-    const normalizedSearchTerm = normalizeStringForComparison(search);
-
-    return (
-      data?.filter((product) => {
-        const normalizedTitle = normalizeStringForComparison(product.title);
-        const normalizedDescription = normalizeStringForComparison(
-          product.description
-        );
-        const normalizedCategory = normalizeStringForComparison(
-          product.category
-        );
-
-        return [
-          normalizedTitle,
-          normalizedDescription,
-          normalizedCategory,
-        ].some((field) => field.includes(normalizedSearchTerm));
-      }) || []
-    );
-  }, [data, search]);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const handleViewProductDetails = useCallback((product: Product) => {
     setSelectedProduct(product);
@@ -58,10 +42,22 @@ export function App() {
     setSearch(value);
   }, []);
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const currentSearch = url.searchParams.get('q');
+  const handleScroll = useCallback(() => {
+    if (window.scrollY > 300) {
+      setShowBackToTop(true);
+    } else {
+      setShowBackToTop(false);
+    }
+  }, []);
 
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
+  useEffect(() => {
     if (currentSearch) {
       setSearch(currentSearch);
     }
@@ -69,9 +65,7 @@ export function App() {
 
   useEffect(() => {
     if (!search) {
-      const url = new URL(window.location.href);
-      url.searchParams.delete('q');
-      window.history.pushState({}, '', url.toString());
+      setSearchParams({});
       return;
     }
 
@@ -80,9 +74,7 @@ export function App() {
     }
 
     timeoutRef.current = window.setTimeout(() => {
-      const url = new URL(window.location.href);
-      url.searchParams.set('q', search);
-      window.history.pushState({}, '', url.toString());
+      setSearchParams({ q: search });
     }, 400);
 
     return () => {
@@ -90,14 +82,20 @@ export function App() {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [search]);
+  }, [search, setSearchParams]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
 
   return (
     <div className="container mx-auto max-w-7xl flex flex-col py-4 sm:py-8 min-h-dvh">
       <header className="pb-4 mb-4 border-b mx-4 border-gray-50 flex flex-col sm:flex-row justify-between gap-4">
         <h1 className="text-3xl text-gray-200 font-bold">
-          Products{' '}
-          {computedProducts?.length ? `(${computedProducts.length})` : ''}
+          Products {data?.length ? `(${data.length})` : ''}
         </h1>
         <div className="sm:min-w-sm relative">
           <Search className="size-4 absolute top-1/2 left-4 transform -translate-x-1/2 -translate-y-1/2 text-gray-800" />
@@ -115,9 +113,9 @@ export function App() {
           <Loading />
         ) : isError ? (
           <Error />
-        ) : computedProducts?.length ? (
+        ) : data?.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {computedProducts.map((product) => (
+            {data.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -180,6 +178,15 @@ export function App() {
           Newton Duarte
         </a>
       </footer>
+
+      {showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className="cursor-pointer fixed bottom-4 right-4 p-2 bg-gray-600 text-white rounded-full shadow-lg hover:bg-gray-500 transition"
+        >
+          <ArrowUp className="size-6" />
+        </button>
+      )}
     </div>
   );
 }
