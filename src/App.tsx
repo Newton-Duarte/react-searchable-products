@@ -31,9 +31,10 @@ export function App() {
           <input
             id="search-product"
             type="search"
-            className="border bg-gray-50 rounded outline-0 pl-8 py-2 pr-2 w-full text-gray-800 focus:ring focus:ring-gray-50/50"
+            className="border bg-gray-50 rounded outline-0 pl-8 py-2 pr-2 w-full text-gray-800 focus:ring focus:ring-gray-50/50 disabled:cursor-not-allowed disabled:bg-gray-400"
             placeholder="Search products..."
             value={search}
+            disabled={isLoading}
             onChange={({ target }) => setSearch(target.value)}
           />
         </div>
