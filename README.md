@@ -52,9 +52,9 @@ This project is a simple web application built with **React**, **TypeScript**, a
 
 ## Future Enhancements
 
-- Enhance the UI with additional styling and animations.
-- Add Units Tests
-- Add E2E Tests
+- [] Enhance the UI with additional styling and animations.
+- [x] Add Units Tests
+- [] Add E2E Tests
 
 ## Contributing
 
