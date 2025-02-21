@@ -1,6 +1,6 @@
 # Product List Viewer
 
-This project is a simple web application built with React, TypeScript, and Vite. It fetches a list of products and displays them on the home page. Users can view product details and utilize a delayed search feature to find products by name or category.
+This project is a simple web application built with **React**, **TypeScript**, and **Vite**. It fetches a list of products and displays them on the home page. Users can view product details and utilize a delayed search feature to find products by name or category.
 
 ## Features
 
@@ -19,7 +19,7 @@ This project is a simple web application built with React, TypeScript, and Vite.
 
 ### Prerequisites
 
-- Node.js and npm installed on your machine.
+- **Node.js** and **npm** installed on your machine.
 
 ### Installation
 
