@@ -1,12 +1,12 @@
 # Product List Viewer
 
-This project is a simple web application built with React, TypeScript, and Vite. It fetches a list of products and displays them on the home page. Users can view product details and a search feature will be implemented in the future.
+This project is a simple web application built with React, TypeScript, and Vite. It fetches a list of products and displays them on the home page. Users can view product details and utilize a delayed search feature to find products by name or category.
 
 ## Features
 
 - **Product Listing**: Displays a list of products on the home page.
 - **Product Details**: View detailed information about each product.
-- **Search Functionality**: (Coming Soon) Search for products by name or category.
+- **Delayed Search Functionality**: Search for products by name or category with a delay to optimize performance and reduce server load.
 
 ## Technologies Used
 
@@ -26,8 +26,8 @@ This project is a simple web application built with React, TypeScript, and Vite.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/product-list-viewer.git
-   cd product-list-viewer
+   git clone https://github.com/Newton-Duarte/react-searchable-products.git
+   cd react-searchable-products
    ```
 
 2. Install dependencies:
@@ -52,9 +52,9 @@ This project is a simple web application built with React, TypeScript, and Vite.
 
 ## Future Enhancements
 
-- Implement a search feature to filter products.
-- Add user authentication for personalized experiences.
 - Enhance the UI with additional styling and animations.
+- Add Units Tests
+- Add E2E Tests
 
 ## Contributing
 
@@ -66,4 +66,4 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For any questions or feedback, please contact [your-email@example.com](mailto:your-email@example.com).
+For any questions or feedback, please contact [newton\_@hotmail.com](mailto:newton_@hotmail.com)
