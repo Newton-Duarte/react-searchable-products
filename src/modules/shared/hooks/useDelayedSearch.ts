@@ -8,7 +8,7 @@ export function useDelayedSearch() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const delayedSearch = searchParams.get('q');
+  const delayedSearch = searchParams.get('q') ?? '';
 
   useEffect(() => {
     if (delayedSearch) {
