@@ -19,6 +19,7 @@ export default defineConfig({
         '**/*.config.{js,ts}',
         '**/mocks/**',
         '**/lib/**',
+        'src/main.tsx',
       ],
     },
   },
