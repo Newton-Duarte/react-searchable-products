@@ -42,4 +42,14 @@ describe('getProducts', () => {
 
     expect(api.get).toHaveBeenCalledWith('products');
   });
+
+  it('returns empty array when the response data is undefined', async () => {
+    vi.spyOn(api, 'get').mockResolvedValueOnce({ data: undefined });
+
+    const result = await getProducts({ search: '' });
+
+    expect(result).toEqual([]);
+
+    expect(api.get).toHaveBeenCalledWith('products');
+  });
 });
