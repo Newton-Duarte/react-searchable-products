@@ -17,7 +17,7 @@ export function ProductModal({ isOpen, onClose, product }: ProductModalProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       {product && (
-        <div className="flex flex-col">
+        <div className="flex flex-col" data-testid="product-modal">
           <div className="flex flex-col items-start p-6 gap-2">
             <ProductImage
               image={product.image}
