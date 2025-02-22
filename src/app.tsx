@@ -36,6 +36,8 @@ export function App() {
             value={search}
             disabled={isLoading}
             onChange={({ target }) => setSearch(target.value)}
+            data-testid="search-product"
+            aria-label="search-product"
           />
         </div>
       </header>
@@ -60,6 +62,7 @@ export function App() {
         <button
           onClick={scrollToTop}
           className="cursor-pointer fixed bottom-4 right-4 p-2 bg-gray-600 text-white rounded-full shadow-lg hover:bg-gray-500 transition"
+          data-testid="back-to-top-button"
         >
           <ArrowUp className="size-6" />
         </button>
