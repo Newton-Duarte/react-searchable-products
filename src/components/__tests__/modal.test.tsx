@@ -33,4 +33,33 @@ describe('Modal component', () => {
 
     expect(onClose).toHaveBeenCalled();
   });
+
+  it('should return null when modal is not open', () => {
+    render(
+      <MemoryRouter>
+        <Modal isOpen={false} onClose={vi.fn()}>
+          <h1>My modal</h1>
+        </Modal>
+      </MemoryRouter>
+    );
+
+    const title = screen.queryByText(/my modal/i);
+
+    expect(title).toBeNull();
+  });
+
+  it('should add overflow-hidden class when modal is open', () => {
+    render(
+      <MemoryRouter>
+        <Modal isOpen onClose={vi.fn()}>
+          <h1>My modal</h1>
+        </Modal>
+      </MemoryRouter>
+    );
+
+    const bodyOverflowHidden =
+      document.body.classList.contains('overflow-hidden');
+
+    expect(bodyOverflowHidden).toBeTruthy();
+  });
 });
