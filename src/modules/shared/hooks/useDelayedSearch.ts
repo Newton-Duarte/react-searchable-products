@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
+const SEARCH_DELAY = 400;
+
 export function useDelayedSearch() {
   const [search, setSearch] = useState('');
 
@@ -28,7 +30,7 @@ export function useDelayedSearch() {
 
     timeoutRef.current = window.setTimeout(() => {
       setSearchParams({ q: search });
-    }, 400);
+    }, SEARCH_DELAY);
 
     return () => {
       if (timeoutRef.current !== null) {
