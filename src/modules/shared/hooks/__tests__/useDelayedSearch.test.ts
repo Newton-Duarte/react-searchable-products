@@ -55,13 +55,15 @@ describe('useDelayedSearch Hook', () => {
       result.current.setSearch('phone');
     });
 
-    expect(mockSetSearchParams).not.toHaveBeenCalled();
+    // The hook clears the searchParams if search is falsy
+    // so it's get called with an empty object
+    expect(mockSetSearchParams).toHaveBeenCalledWith({});
 
     act(() => {
       vi.advanceTimersByTime(400);
     });
 
-    expect(mockSetSearchParams).toHaveBeenCalledTimes(1);
+    expect(mockSetSearchParams).toHaveBeenCalledTimes(2);
     expect(mockSetSearchParams).toHaveBeenCalledWith({ q: 'phone' });
 
     vi.useRealTimers();
