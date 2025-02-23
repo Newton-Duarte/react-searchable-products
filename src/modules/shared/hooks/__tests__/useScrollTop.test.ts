@@ -49,4 +49,20 @@ describe('useScrollTop Hook', () => {
 
     expect(result.current.showBackToTop).toBe(false);
   });
+
+  it('should call scroll to top', () => {
+    const spyScrollTo = vi.fn();
+
+    Object.defineProperty(globalThis.window, 'scrollTo', {
+      value: spyScrollTo,
+    });
+
+    const { result } = renderHook(() => useScrollTop());
+
+    act(() => {
+      result.current.scrollToTop();
+    });
+
+    expect(spyScrollTo).toHaveBeenCalled();
+  });
 });
