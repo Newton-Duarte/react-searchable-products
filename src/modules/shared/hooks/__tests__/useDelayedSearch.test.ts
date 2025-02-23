@@ -69,6 +69,29 @@ describe('useDelayedSearch Hook', () => {
     vi.useRealTimers();
   });
 
+  it('should clear previous timer delay', async () => {
+    vi.useFakeTimers();
+
+    const { result } = renderHook(() => useDelayedSearch(), {
+      wrapper: MemoryRouter,
+    });
+
+    act(() => {
+      result.current.setSearch('pho');
+      vi.advanceTimersByTime(100);
+    });
+
+    act(() => {
+      result.current.setSearch('phone');
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(mockSetSearchParams).toHaveBeenCalledTimes(1);
+    expect(mockSetSearchParams).toHaveBeenCalledWith({});
+
+    vi.useRealTimers();
+  });
+
   it('should clear searchParams when search is empty', async () => {
     vi.useFakeTimers();
 
