@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
+const SCROLL_Y_THRESHOLD = 300;
+
 export function useScrollTop() {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   const handleScroll = useCallback(() => {
-    if (window.scrollY > 300) {
+    if (window.scrollY > SCROLL_Y_THRESHOLD) {
       setShowBackToTop(true);
     } else {
       setShowBackToTop(false);
