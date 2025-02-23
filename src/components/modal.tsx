@@ -27,7 +27,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
         <button
           onClick={onClose}
           type="button"
-          className="cursor-pointer absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          className="cursor-pointer absolute top-2 right-2 text-gray-500 hover:text-gray-50"
           data-testid="close-modal-button"
         >
           <X className="size-8 sm:size-12" />
