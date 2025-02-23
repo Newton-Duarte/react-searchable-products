@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="text-gray-50 text-center py-4">
+    <footer className="text-gray-800 dark:text-gray-50 bg-white dark:bg-gray-900 text-center py-4">
       Developed by{' '}
       <a
         href="https://github.com/newton-duarte"
